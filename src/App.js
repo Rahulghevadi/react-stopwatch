@@ -4,21 +4,32 @@ import './App.css';
 
 
 function App() {
-  const [isactive, setIsactive] = useState(false);
-  const [ispause, setIspause] = useState(false);
+  const [timerOn, setTimeOn] = useState(0);
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    let interval = setInterval(() => {
-      setTime((time) => time + 10);
-    }, 10);
-  }, [isactive, ispause])
+    let interval = null;
 
+    if (timerOn) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 10)
+      }, 10);
+    } else {
+      clearInterval(interval)
+    }
+    return () => clearInterval(interval);
+  }, [timerOn]);
   return (
 
 
     <div className='App' >
-      {console.log(time)}
+      <div>{time}</div>
+      <div>
+        <button onClick={() => setTimeOn(true)}>Start</button>
+        <button onClick={() => setTimeOn(false)}>Stop</button>
+        <button onClick={() => setTimeOn(true)}>Resume</button>
+        <button onClick={() => setTime(0)}>Reset</button>
+      </div>
     </div>
   )
 }
