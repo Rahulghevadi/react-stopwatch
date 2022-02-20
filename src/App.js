@@ -23,8 +23,8 @@ function App() {
 
 
     <div className='App' >
-      <div>{time}</div>
-      <div>
+      <div className='time'>{time}</div>
+      <div className='buttons'>
         <button onClick={() => setTimeOn(true)}>Start</button>
         <button onClick={() => setTimeOn(false)}>Stop</button>
         <button onClick={() => setTimeOn(true)}>Resume</button>
